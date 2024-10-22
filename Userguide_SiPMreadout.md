@@ -20,7 +20,7 @@
 * each SiPM have 2 signal output, one is positive, one is negative
 * SiPM board get HV from connector
 
-<img src="SiPMboard.drawio.svg" width=100%>
+<img src="Sipmboard.drawio.svg" width=100%>
 
 ## Connector board
 * each connector board connect to 10 SiPM board

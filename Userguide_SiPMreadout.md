@@ -52,3 +52,26 @@
 * we can set the coincidence mode and coincidence window in DAQ by configure the switch on the board
 
 <img src="DAQ.drawio.svg" width=100%>
+
+* DAQ data format
+  * FPGA board data output [1024 bit]/[128 byte] per event
+  * every 2 byte is one channel data
+  * <img src="channel data map.JPG" width=100%>
+  * [channel63high,channel63low....channel0high,channel0low]
+  * if you find byte100 is 0x22,byte101 is 0x11, it means “字节序号50” ，“探测器编号3” channel data is 0x1122
+* data compress
+  * cosmic ray signal is rare, so we can compress the data by remove the 0 data
+  * we can compress one FPGA board data to 8/16 byte
+  * data format is 
+  * 8bit compress[byteaddr0,byte0,byteaddr1,byte1,byteaddr2,byte2,byteaddr3,byte3]
+  * 16bit compress[byteaddr0,byte0,byteaddr1,byte1,byteaddr2,byte2,byteaddr3,byte3,byteaddr4,byte4,byteaddr5,byte5,byteaddr6,byte6,byteaddr7,byte7]
+  * notice that is the byte address,if a signal adc value <256,it will only cost 1 byte to store the data,if the adc value >256,it will cost 2 byte to store the data. 
+  * so in the case of 8 byte compress, we can get 4 channel data at maximum, 2 channel data at minimum
+  * in the case of 16 byte compress, we can get 8 channel data at maximum, 4 channel data at minimum
+* data pack to User PC(uart)
+  * [header(11111100),DAQ0(8/16byte),DAQ1(8/16byte),DAQ2(8/16byte),DAQ3(8/16byte),DAQ4(8/16byte),DAQ5(8/16byte),DAQ6(8/16byte)(0 now),DAQ7(8/16byte)(0 now),end(00000011)]
+* user data reconstruct
+  * we can use the header and end to get package
+  * check package length to filter the data
+  * reconstruct the data to get the channel data
+

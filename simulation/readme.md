@@ -11,3 +11,8 @@
   * use ADA4891 as pre amplifier
   * use LTC6752 as comparator
   * use current source as input signal
+* LTC6752_TOT.asc
+  * for simulation of time over threshold(TOT) charge to digital converter(QDC) circuit
+  * use ADA4891 as pre amplifier
+  * use LTC6752 as comparator
+  * use current source as input signal

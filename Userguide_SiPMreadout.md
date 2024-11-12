@@ -13,14 +13,14 @@
 * One DAQ get 3 boxes data and send to PC
 * we can set the coincidence mode and coincidence window in DAQ by configure the switch on the board
 
-<img src="Top.drawio.svg" width=100%>
+<img src="./figure/Top.drawio.svg" width=100%>
 
 ## SiPM board
 * each SiPM board have 4 SiPMs
 * each SiPM have 2 signal output, one is positive, one is negative
 * SiPM board get HV from connector
 
-<img src="Sipmboard.drawio.svg" width=100%>
+<img src="./figure/Sipmboard.drawio.svg" width=100%>
 
 ## Connector board
 * each connector board connect to 10 SiPM board
@@ -28,14 +28,14 @@
 * connector get the anode signal from SiPM board but send it to GND
 * connector get the HV from FEE board and send it to SiPM board
 
-<img src="Connector.drawio.svg" width=100%>
+<img src="./figure/Connector.drawio.svg" width=100%>
 
 ## FEE (front end Electronics)
 * each FEE board have 64 channels, we use 40 channels
 * FEE get the cathode signal from connector board, get the HV from DC Voltage source.
 * FEE get discharge signal from FPGA board and send the pulse to FPGA board
 
-<img src="FEE.drawio.svg" width=100%>
+<img src="./figure/FEE.drawio.svg" width=100%>
 
 ## FPGA board
 * each FPGA board have 64 channels, we use 40 channels
@@ -44,19 +44,19 @@
 * FPGA get the CLK from DAQ board and send the data to DAQ board
 * all parameters and feature can be find at "discharge_time_digitalize.v" file
 
-<img src="FPGAboard.drawio.svg" width=100%>
+<img src="./figure/FPGAboard.drawio.svg" width=100%>
 
 ## DAQ (Data Acquisition)
 * each DAQ board can get data from 16 FPGA board but now we only use 6 FPGA board
 * DAQ board get the data from FPGA board, send CLK to FPGA board, compress data and send to PC by UART
 * we can set the coincidence mode and coincidence window in DAQ by configure the switch on the board
 
-<img src="DAQ.drawio.svg" width=100%>
+<img src="./figure/DAQ.drawio.svg" width=100%>
 
 * DAQ data format
   * FPGA board data output [1024 bit]/[128 byte] per event
   * every 2 byte is one channel data
-  * <img src="channel data map.JPG" width=100%>
+  * <img src="./figure/channel data map.JPG" width=100%>
   * [channel63high,channel63low....channel0high,channel0low]
   * if you find byte100 is 0x22,byte101 is 0x11, it means “字节序号50” ，“探测器编号3” channel data is 0x1122
 * data compress
